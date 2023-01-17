@@ -1,0 +1,14 @@
+package com.cos.blog.test;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+public class Member {
+	
+	@Data
+	@AllArgsConstructor
+	private int id;
+	private String username;
+	private String password;
+	private String email;
+}
