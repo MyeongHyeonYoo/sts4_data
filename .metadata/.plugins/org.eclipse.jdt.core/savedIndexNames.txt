@@ -64,7 +64,6 @@ INDEX VERSION 1.131+C:\ThisIsJavaSecondEdition\eclipse-workspace\sts4_data\.meta
 4249719812.index
 2218915354.index
 2758908191.index
-3666893704.index
 3611152287.index
 48443998.index
 40112312.index

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-// @Entity //테이블을 만들겠다
+@Entity //테이블을 만들겠다
 public class User {
 	
 	@Id // primary key를 쓰겠다
