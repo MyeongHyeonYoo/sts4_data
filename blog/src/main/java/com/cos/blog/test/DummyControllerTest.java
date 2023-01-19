@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 
 
@@ -65,6 +69,7 @@ public class DummyControllerTest {
 	
 	
 	//http://localhost:8000/blog/dummy/user/5
+	@Transactional
 	@PutMapping("/dummy/user/{id}")
 	public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
 		System.out.println("id: " + id);
@@ -73,18 +78,24 @@ public class DummyControllerTest {
 		User user = userRepository.findById(id).orElseThrow(()->{
 			return new IllegalArgumentException("수정에 실패하였습니다.");
 		});
-		requestUser.setId(id);
-		requestUser.setUsername("love");
-		userRepository.save(requestUser);
+		//userRepository.save(requestUser);
+		//requestUser.setId(id);
+		//requestUser.setUsername("love");
+		//userRepository.save(requestUser);
+		
+		user.setPassword(requestUser.getPassword());
+		user.setEmail(requestUser.getEmail());
 		return null;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	//http://localhost:8000/blog/dummy/user/{id}
+		@DeleteMapping("/dummy/user/{id}")
+		public String delete(@PathVariable int id) {
+			try {
+				userRepository.deleteById(id);
+			} catch (EmptyResultDataAccessException e) {
+				return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
+			}
+			return "삭제되었습니다. id : " + id;
+		}
 }
