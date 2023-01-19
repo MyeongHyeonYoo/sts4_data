@@ -2,8 +2,12 @@ package com.cos.blog.model;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,26 +20,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity //테이블을 만들겠다
+//ORM -> Java(다른언어) Object -> 테이블이 매핑해주는 기술
+@Entity // User 클래스가 MySQL에 테이블이 생성된다.
+//@DynamicInsert //insert시에  null인 필드를 제외시켜 준다.
 public class User {
 	
-	@Id // primary key를 쓰겠다
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false, length = 30, unique = true)
-	// nullable = false -> not null
-	// unique = true -> 중복을 허용하지 않겠다.
+	@Column(nullable = false, length=30, unique = true)
 	private String username;
 	
-	@Column(nullable = false, length = 100)
-	// 암호를 해쉬 태그로 바꾸기 위해 100으로 지정
+	@Column(nullable = false, length=100)
 	private String password;
 	
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length=50)
 	private String email;
 	
-	//사용자 or 관리자 여부
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private RoleType role; //Enum을 사용하는 것이 유익함 //ADMIN, USER로 제한
+	//private String role;
+	
+	
+	@CreationTimestamp
 	private Timestamp createDate;
+
 }

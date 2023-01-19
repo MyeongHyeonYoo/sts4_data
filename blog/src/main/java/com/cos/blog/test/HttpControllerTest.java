@@ -16,19 +16,19 @@ public class HttpControllerTest {
 	//http://localhost:8000/http/get(select)
 	@GetMapping("http/get")
 	public String getTest(Member m) {
-		return "get 요청" + m.getId() + "," + m.getUsername() + "," + m.getPassword() + "," + m.getEmail();
+		return "get 요청 : " + m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail(); 
 	}
 	
 	//http://localhost:8000/http/post(insert)
 	@PostMapping("http/post")
 	public String postTest(@RequestBody Member m) {
-		return "post 요청 : " + m.getId() + "," + m.getUsername() + "," + m.getPassword() + "," + m.getEmail();
+		return "post 요청 : "+ m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail();
 	}
 	
 	//http://localhost:8000/http/put(update)
 	@PutMapping("http/put")
 	public String putTest(@RequestBody Member m) {
-		return "put 요청" + m.getId() + "," + m.getUsername() + "," + m.getPassword() + "," + m.getEmail();
+		return "put 요청"+ m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail();
 	}
 	
 	//http://localhost:8000/http/delete(delete)
@@ -37,16 +37,33 @@ public class HttpControllerTest {
 		return "delete 요청";
 	}
 	
-	private static final String TAG = "HttpControllerTest";
+	private static final String TAG="HttpControllerTest";
 	
 	//http://localhost:8000/http/lombok
-	@GetMapping("http/lombok")
-	public String lomboktest() {
-		Member m = new Member(1, "ssar", "1234", "eamil");
-		System.out.println(TAG + "getter : " + m.getId());
+	@GetMapping("/http/lombok")
+	public String lombokTest(){
+		Member m = Member.builder().username("ssar").password("1234").email("ssar@nate.com").build();
+		System.out.println(TAG+"getter : " + m.getId());
 		m.setId(5000);
-		System.out.println(TAG + "setter : " + m.getId());
+		System.out.println(TAG+"setter : " + m.getId());
 		return "lombok test 완료";
 	}
 	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

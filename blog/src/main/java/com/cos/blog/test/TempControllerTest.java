@@ -5,25 +5,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TempControllerTest {
-	// http://localhost:8000/blog/temp/home
+	
+	//http://localhost:8000/blog/temp/home
 	@GetMapping("/temp/home")
 	public String tempHome() {
 		System.out.println("tempHome()");
 		return "/home.html";
-	}
+	} 
 
-	// http://localhost:8000/blog/temp/jpg
+	//http://localhost:8000/blog/temp/jsp
 	@GetMapping("/temp/jsp")
 	public String tempJsp() {
-		System.out.println("tempJsp()");
-		return "/test";
+		return "test";
 	}
-
-	// http://localhost:8000/blog/temp/img
+	
+	//http://localhost:8000/blog/temp/img
 	@GetMapping("/temp/img")
 	public String tempImg() {
-		System.out.println("tempImg()");
 		return "/java.jpg";
-	}
+	} 
+	
+	
 
 }
